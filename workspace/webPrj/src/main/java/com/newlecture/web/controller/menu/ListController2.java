@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.newlecture.web.entity.GList;
@@ -62,8 +63,12 @@ public class ListController2 extends HttpServlet{
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String nicName = rs.getString("nicname");
+				Date regDate = rs.getDate("reg_date");
+				String images = "img1.png, img2.png, img3.png, img4.png, img5.png";
 				
-				Menu menu = new Menu(id, name, 1000, "");
+				
+				Menu menu = new Menu(id, name, 1000, "", regDate);
+				menu.setImages(images);
 				
 				menus.add(menu);
 				
@@ -85,8 +90,8 @@ public class ListController2 extends HttpServlet{
 		//request에 담아둠.
 		req.setAttribute("menus", menus);
 		
-//		req.getR equestDispatcher("/WEB-INF/view/menu/list2.jsp").forward(req, resp);
-		req.getRequestDispatcher("listview").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/view/menu/list2.jsp").forward(req, resp);
+//		req.getRequestDispatcher("listview").forward(req, resp);
 //		============================================
 		
 //		out.write("<!DOCTYPE html>");

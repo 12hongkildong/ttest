@@ -10,4 +10,5 @@
     <fullyQualifiedTypeName name="com.newlecture.web.entity.Menu"/>
     <fullyQualifiedTypeName name="com.newlecture.web.entity.NList"/>
     <fullyQualifiedTypeName name="com.newlecture.web.service.MenuService"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>
