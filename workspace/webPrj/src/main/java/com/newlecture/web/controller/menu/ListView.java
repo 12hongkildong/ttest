@@ -32,7 +32,7 @@ public class ListView extends HttpServlet{
 	   resp.setContentType("text/html;charset=utf-8");
 	   
 	   PrintWriter out = resp.getWriter();
-	   List<Menu> menus = (List<Menu>) req.getAttribute("menues");
+	   List<Menu> menus = (List<Menu>) req.getAttribute("menus");
 	   
 //      =========================================출력코드
       

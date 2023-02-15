@@ -85,8 +85,8 @@ public class ListController2 extends HttpServlet{
 		//request에 담아둠.
 		req.setAttribute("menus", menus);
 		
-//		req.getRequestDispatcher("/WEB-INF/view/menu/list.jsp").forward(req, resp);
-		req.getRequestDispatcher("../menu/listview").forward(req, resp);
+//		req.getR equestDispatcher("/WEB-INF/view/menu/list2.jsp").forward(req, resp);
+		req.getRequestDispatcher("listview").forward(req, resp);
 //		============================================
 		
 //		out.write("<!DOCTYPE html>");
