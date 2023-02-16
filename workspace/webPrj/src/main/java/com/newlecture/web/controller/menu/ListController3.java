@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.newlecture.web.entity.GList;
 import com.newlecture.web.entity.Menu;
+import com.newlecture.web.service.DefaultMenuService;
 import com.newlecture.web.service.MenuService;
 
 import jakarta.servlet.ServletException;
@@ -21,10 +22,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/menu/list2")
+@WebServlet("/menu/list3")
 public class ListController3 extends HttpServlet{
 	
 	private MenuService service;
+	
+	public ListController3() {
+		service = new DefaultMenuService();
+	}
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -34,48 +41,14 @@ public class ListController3 extends HttpServlet{
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		PrintWriter out = resp.getWriter();
-		out.print("hello");
-
-		String query = "";
-		String sql = String.format("select * from member where nicname like '%s'", "%"+query+"%") ;
-		List<Menu> menus = new ArrayList<>();
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@oracle.newlecture.com:1521/xepdb1";
-			Connection con = DriverManager.getConnection(url, "NEWLEC", "rland");
-			
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			
-
-			while(rs.next())	// 서버의 커서를 한칸 내리고 그 위치의 레코드를 옮겨 오는 것. -> 레코드 하나가 저장되는 공간은?
-			{
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String nicName = rs.getString("nicname");
-				Date regDate = rs.getDate("reg_date");
-				String images = "img1.png, img2.png, img3.png, img4.png, img5.png";
-				
-				
-				Menu menu = new Menu(id, name, 1000, "", regDate);
-				menu.setImages(images);
-				
-				menus.add(menu);
-				
-			}
-			
-			con.close();
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
+		List<Menu> menus = service.getList();
+		
+		
 		
 		req.setAttribute("menus", menus);
 		
 		req.getRequestDispatcher("/WEB-INF/view/menu/list2.jsp").forward(req, resp);
-//		req.getRequestDispatcher("listview").forward(req, resp);
 //		============================================
 		
 //		out.write("<!DOCTYPE html>");
