@@ -32,6 +32,7 @@
 				<tr>
 					<td colspan="4">
 						<c:forTokens var="img" items="${m.images }" delims=",">
+						<a download href="upload/s{img}">${img} |</a>
 						${img }
 						</c:forTokens>
 					</td>
