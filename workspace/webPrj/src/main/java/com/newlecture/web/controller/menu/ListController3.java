@@ -40,6 +40,8 @@ public class ListController3 extends HttpServlet{
 		//브라우저에서 html로 읽고 UTF-8로 읽어라 하고 헤더에 넣어줌.
 		resp.setContentType("text/html; charset=UTF-8");
 		
+		req.getParameter("c");
+		
 		PrintWriter out = resp.getWriter();
 		
 		List<Menu> menus = service.getList();
@@ -49,37 +51,6 @@ public class ListController3 extends HttpServlet{
 		req.setAttribute("menus", menus);
 		
 		req.getRequestDispatcher("/WEB-INF/view/menu/list2.jsp").forward(req, resp);
-//		============================================
-		
-//		out.write("<!DOCTYPE html>");
-//		out.write("<html>");
-//		out.write("<head>");
-//		out.write("<meta charset=\"UTF-8\">");
-//		out.write("<title>Insert title here</title>");
-//		out.write("</head>");
-//		out.write("<body>");
-//		out.write("<h1>메뉴 목록</h1>");
-//		out.write("<table>");
-//		out.write("<tr>");
-//		out.write("<td>번호</td>");
-//		out.write("<td>이름</td>");
-//		out.write("<td>가격</td>");		
-//		out.write("</tr>");
 //		
-//		for(int i=0; i<menus.size(); i++) {
-//			// 형식 변환
-//			Menu m = (Menu) menus.get(i);
-//			
-//		out.write("<tr>");	
-//		out.write("	<td>"+m.getId()+"</td>");	
-//		out.write("	<td>"+m.getName()+"</td>");	
-//		out.write("	<td>5000</td>");				
-//		out.write("</tr>");
-//		}
-//		
-//		out.write("</table>");	
-//		out.write("</body>");	
-//		out.write("</html>");	
-		
 	}
 }

@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+		<a href="/input?p=14&q=hello&s=15">1</a><br>
+		<a href="/input?p=17&q=hello&s=19">2</a><br>
+		<a href="/input?p=18&q=hello&s=20">3</a><br>
+		
+		
+		<form action="/input">
+		<label>page:</label>
+			<input type="text" name="p"><br>
+			<label>검색어:</label>
+			<input type="text" name="q"><br>
+			<label>size:</label>
+				<input type="text" name="s"><br>
+			<input type="submit" value="제출">
+		</form>");
+</body>
+</html>
