@@ -22,7 +22,7 @@
 			hb length : ${cnt }<br>
 		</div>
 		
-		<form action="/input">
+		<form action="/input" method="post">
 		<label>page:</label>
 		
 			<fieldset>

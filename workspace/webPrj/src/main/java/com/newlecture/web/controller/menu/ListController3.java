@@ -18,9 +18,11 @@ import com.newlecture.web.service.MenuService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/menu/list3")
 public class ListController3 extends HttpServlet{
@@ -44,9 +46,15 @@ public class ListController3 extends HttpServlet{
 		
 		PrintWriter out = resp.getWriter();
 		
-		List<Menu> menus = service.getList();
+		List<Menu> menus = new ArrayList<>(); //service.getList();
 		
-		
+//		HttpSession session = req.getSession();
+//		session.setAttribute("haha","hoho");
+//		
+		Cookie cookie = new Cookie("haha", "hoho");
+		cookie.setPath("/");
+		cookie.setMaxAge(60*24);
+		resp.addCookie(cookie);
 		
 		req.setAttribute("menus", menus);
 		

@@ -72,7 +72,7 @@ public class InputController extends HttpServlet{
 		
 		
 //		3. 쿠키 입력
-		
+			
 		
 		
 //		4. header 입력

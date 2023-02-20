@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.newlecture.web.poly.ExamConsole"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="com.newlecture.web.entity.Menu"/>
     <fullyQualifiedTypeName name="com.newlecture.web.entity.NList"/>
     <fullyQualifiedTypeName name="com.newlecture.web.service.MenuService"/>
@@ -19,4 +18,8 @@
     <fullyQualifiedTypeName name="jakarta.servlet.annotation.WebFilter"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="jakarta.servlet.annotation.WebServlet"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.http.parser.Cookie"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.Cookie"/>
 </qualifiedTypeNameHistroy>
