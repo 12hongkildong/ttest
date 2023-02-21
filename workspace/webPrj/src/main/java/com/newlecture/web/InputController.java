@@ -76,7 +76,7 @@ public class InputController extends HttpServlet{
 		
 		
 //		4. header 입력
-		
+			
 		
 		
 //		5. hidden 필드 입력

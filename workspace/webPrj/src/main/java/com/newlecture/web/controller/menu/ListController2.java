@@ -11,12 +11,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+
 import com.newlecture.web.entity.GList;
 import com.newlecture.web.entity.Menu;
 import com.newlecture.web.service.MenuService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,6 +45,13 @@ public class ListController2 extends HttpServlet{
 		String haha = (String)session.getAttribute("haha");
 		System.out.println(haha);
 		
+		
+		Cookie[] cookies = req.getCookies();
+		for(Cookie cookie : cookies)
+			if(cookie.getName().equals("haha")) {
+				System.out.println(cookie.getValue());
+				break;
+			}
 		
 //		PrintWriter out = resp.getWriter();
 //		out.print("hello");

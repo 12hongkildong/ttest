@@ -1,0 +1,111 @@
+package com.newlecture.web.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+
+import com.newlecture.web.controller.menu.DetailPOJOController5;
+import com.newlecture.web.controller.menu.ListPOJOController4;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/") // 모든걸 여기서 처리하기
+public class JSPDispatcherServlet2 extends HttpServlet {
+   String[] urls = { "/menu/list", "menu/detail" };
+   String[] controllers = { "com.newlecture.web.controller.menu.ListPOJOController",
+         "com.newlecture.web.controller.menu.DetailPOJOController" };
+
+   @Override
+   protected void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+      PrintWriter out = res.getWriter();
+      
+        String uri = req.getRequestURI(); String url =
+        req.getRequestURL().toString();
+       
+
+      String viewSrc = "/WEB-INF/view/notfound.jsp";
+
+      out.printf("uri:%s\n", uri);
+      out.printf("url:%s", url);
+      // 방법1
+      // menu/list요청이 오면 Listcontroller와 requestHandler()를 호출하고->핸들러 요청을 다루는 메소드
+//      if(uri.equals("/menu/list")) 
+//         viewSrc = new ListPOJOController().requestHandler();
+
+      // menu/detail 요청이 오면 DetailController의 requestHandler를 호출한다.
+//      if(uri.equals("/menu/detail")) 
+//         viewSrc =new DetailPOJOController().requestHandler();
+
+      // 위코드를 계속 반복해야하나? 그건 귀찬음
+      // 방법2 컴퓨터가 반복하는 코드
+      //리플랙션!!
+       Object controller;
+      try {
+         controller = Class.
+                forName("com.newlecture.web.controller.menu.ListPOJOController").
+                getDeclaredConstructor().
+                newInstance();
+         //개채명에서 클래스 정보 얻기
+         Class clsInfo = Class.forName("com.newlecture.web.controller.menu.ListPOJOController4");
+         
+         //개체(Class)에서 클래스 정보 억기
+         Class clsInfol = ListPOJOController4.class;
+         //객체에서 클래스 정보 얻기
+         Class clsInfo2 = controller.getClass();
+         
+         Method[] methods=   clsInfo.getDeclaredMethods();
+         
+         Method method = null;
+         //메서드의 이름을 가져오는데 private든 public이든 다 가져올 수 있다.
+         for(Method m : methods) {
+            if(m.getName().equals("add"))
+               method= m;
+            
+         }
+         //method.getParameterCount();
+         Parameter[] params = method.getParameters();
+         for(Parameter p : params) {
+            System.out.println(p.getType().toString()); //파라미터를 보고 2개의 인자를 알수 있고 무슨 형태인지 알 수 있다.
+         }
+         
+         int result = (int) method.invoke(controller,3,4); //controller는 this를 선언되고 그다음에는 인자로 들어간다.
+         
+         System.out.println(result); //와 근데 호출은 안된다 즉 이름은 빼와도 호출은 보호모드로 된다.
+      
+      } catch (InstantiationException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IllegalAccessException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (IllegalArgumentException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (InvocationTargetException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (SecurityException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      } catch (ClassNotFoundException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      
+         
+         
+
+      req.getRequestDispatcher(viewSrc).forward(req, res);
+
+   }
+
+}

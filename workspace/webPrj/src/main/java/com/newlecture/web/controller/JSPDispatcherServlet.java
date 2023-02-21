@@ -1,0 +1,123 @@
+package com.newlecture.web.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.Method;
+
+import com.newlecture.web.$missing$;
+import com.newlecture.web.objs;
+import com.newlecture.web.controller.menu.ListPOJOController4;
+import com.newlecture.web.controller.menu.detailPOJOController5;
+import com.oracle.wls.shaded.org.apache.xalan.xsltc.runtime.Parameter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+
+//@WebServlet("/")
+public class JSPDispatcherServlet extends HttpServlet {
+	
+	String[] urls = {
+			"menu/list", 
+			"/menu/detail"}; // 
+	?[] controllers = {
+			"com.newlecture.web.controller.menu.ListPOJOController4", 
+			"com.newlecture.web.controller.menu.detailPOJOController5"
+			};// url과 매핑되는 녀석
+	
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		
+//		String uri = request.getRequestURI();
+//		String url = request.getRequestURL().toString();				
+//		
+//		out.printf("uri: %s\n", uri);
+//		out.printf("url: %s\n", url);
+//		System.out.println(uri);
+		String viewSrc = "/WEB-INF/view/notfound.jsp";
+	
+		
+		bject controller = Class
+				.forName("com.newlecture.web.controller.menu.ListPOJOController4")
+				.getDeclaredConstructor()
+				.newInstance();
+		
+		//갸ㅐ체명 (문자열)에서 클래스 정보 얻기
+		Class clsInfo = Class.forName("com.newlecture.web.controller.menu.ListPOJOController4");
+		
+		
+		
+		// 객체에서 클래스 정보 얻기
+		Class clsInfo2 = controller.getClass();
+		
+		
+		
+		// 개체(class)에서 클래스 정보 얻기 -> reflection
+		Class clsInfo1 = ListPOJOController4.class;
+		
+		
+		 Method[] methods = clsInfo.getDeclaredMethods();
+		
+		 Method method = null;
+		 for(Method m : methods) {
+			 if(m.getName().equals("add"))
+				 method = m;
+		 }
+		 
+//		 method.getParameterCount();
+		 Parameter[] params = method.getParameters();
+		 for(Parameter p : params)	
+			 System.out.printf("param : %s\n", p.getType().toString());
+		 
+//		 if(params.length >2)
+//			 params[2].getType();
+
+		 Object[] objs = null;
+		 if()
+			 objs = {2};
+		 
+		int result = (int)method.invoke(controller, objs);
+		System.out.printf("result : %d\n", result);
+		
+		
+		
+		
+//		방법2. 컴퓨터가 반복하는 코드
+		for(int i=0 ; i<urls.length ; i++) {
+			?controller = null;
+			if(uri.equals(urls[i]))
+				controller = (??)Class.forName(controllers[i]).newInstance();
+				controller.requestHandler();
+//				viewSrc = new ListPOJOController4().requestHandler();
+		}
+		
+		
+		
+//		방법1. 내가 반복하는 방법
+//		if(uri.equals("/menu/list"))
+//			viewSrc = new ListPOJOController4().requestHandler();
+//		
+//		if(uri.equals("/menu/detail"))
+//			viewSrc = new detailPOJOController5().requestHandler();
+		
+		
+		
+		out.write("hello Front");
+		
+		request.getRequestDispatcher(viewSrc).forward(request, response);
+		
+		
+//		menu/list를 요청받으면 ListPOJOPController4의 requestHandler를 호출하고
+
+//		menu/detail를 요청받으면 detailController4의 requestHandler를 호출하고
+		
+	}
+	
+}
+
+
+
